@@ -7,12 +7,12 @@ RUN mkdir /run/sshd
 RUN echo 'sudo /usr/sbin/sshd -D' >> /start.sh
 #RUN echo 'PermitRootLogin yes' >>  /etc/ssh/sshd_config
 #RUN echo root:railway2023 | chpasswd
-RUN useradd -m -d /home/admin -s /bin/bash admin
+RUN useradd -m -d /home/admin -s /bin/bash -u 10001 admin
 RUN echo admin:railway2023 | chpasswd
 RUN usermod -aG sudo admin
 RUN echo "admin  ALL=(ALL)  NOPASSWD: ALL" >> /etc/sudoers
 RUN chmod +x /start.sh
 EXPOSE 22
-USER admin
+USER 10001
 CMD  /start.sh
 
